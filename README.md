@@ -1,7 +1,7 @@
 
 # Deploy Pets Breeds Classifier using flask 
 
-[![](https://img.shields.io/badge/python-3.5%2B-green.svg)]()
+
 
 
 > A web app to predict pets breed.
