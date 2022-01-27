@@ -11,13 +11,9 @@
 
 Demo:
 
-<p align="center">
-  <img src="screenshot1.png" width="600px" alt="">
-</p>
+![screenshot1](https://user-images.githubusercontent.com/43055935/151333356-53f8b746-8357-4dfd-8b87-80ebd8d2c1f6.PNG)
 
-<p align="center">
-  <img src="screenshot2.png" width="600px" alt="">
-</p>
+![screenshot2](https://user-images.githubusercontent.com/43055935/151333495-998a8380-5bc8-4c47-99e6-5ef6d352bfc3.PNG)
 
 ------------------
 
