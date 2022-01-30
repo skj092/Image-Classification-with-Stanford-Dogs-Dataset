@@ -21,8 +21,11 @@ Demo:
 ## Getting started
 
 - Fork and clone this repo on to your system
-- Run the notebook and download the export.pkl file
-- 
+- Run the notebook and download the export.pkl file (you can also run the notebook on colab or kaggle kernal)
+- Create a virtual environment (python -m venv .env)
+- activate virtual environment (.env\script\activate)
+- Install requirements.txt file (pip install -r requirements.txt)
+- run python app.py
 
 
 
