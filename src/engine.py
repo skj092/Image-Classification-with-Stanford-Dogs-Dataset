@@ -11,11 +11,9 @@ def train(dataloader, model, optimizer, device):
     tk0 = tqdm(dataloader, desc="Train")
     for step, batch in enumerate(tk0):
         inputs = batch['image']
-        targets = batch['label']
-        
+        targets = batch['label']     
         inputs = inputs.to(device, dtype=torch.float)
         targets = targets.to(device, dtype=torch.long)
-        
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, targets)
@@ -29,19 +27,13 @@ def evaluate(data_loader, model, device):
     val_preds = None
     val_labels = None
     tk0 = tqdm(data_loader, desc='Validate')
-    
-    for step, batch in enumerate(tk0):
-            
+    for step, batch in enumerate(tk0):       
         inputs = batch["image"]
-        targets = batch["label"]
-        
+        targets = batch["label"]    
         inputs = inputs.to(device, dtype=torch.float)
         targets = targets.to(device, dtype=torch.long)
-
         with torch.no_grad():
             output = model(inputs)
-            print('output shape:' , output.shape)
-            print('targets shape', targets.shape)
             loss = criterion(output, targets)
             val_loss += loss.item()
             
@@ -51,7 +43,7 @@ def evaluate(data_loader, model, device):
                 val_preds = preds
             else:
                 val_preds = torch.cat((val_preds, preds), dim=0)
-        return val_loss
+    return val_loss
 
 def predict(dataloader, model, device):
     model.eval()
