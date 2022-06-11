@@ -18,3 +18,6 @@ test_images = images[int(7390*0.9):]
 def find_label(img):
     m = re.search(r'(.+)_\d+.jpg$', img.name)
     return m.group(1)
+
+
+
