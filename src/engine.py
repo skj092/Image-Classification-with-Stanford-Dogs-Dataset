@@ -10,8 +10,8 @@ def train(dataloader, model, optimizer, device):
     tr_loss = 0
     tk0 = tqdm(dataloader, desc="Train")
     for step, batch in enumerate(tk0):
-        inputs = batch[0]
-        targets = batch[1]
+        inputs = batch['image']
+        targets = batch['label']
         
         inputs = inputs.to(device, dtype=torch.float)
         targets = targets.to(device, dtype=torch.long)
@@ -32,25 +32,20 @@ def evaluate(data_loader, model, device):
     
     for step, batch in enumerate(tk0):
             
-        inputs = batch[0]
-        targets = batch[1]
-        
-        if val_labels is None:
-            val_labels = targets.clone().squeeze(-1)
-        else:
-            val_labels = torch.cat((val_labels, targets.squeeze(-1)))
+        inputs = batch["image"]
+        targets = batch["label"]
         
         inputs = inputs.to(device, dtype=torch.float)
-        targets = targets.to(device, dtype=torch.float)
+        targets = targets.to(device, dtype=torch.long)
+
         with torch.no_grad():
             output = model(inputs)
-            losses = []
-            for i in range(4):
-                losses.append(criterion(output[i], targets[:,i]))
-            loss = losses[0]+losses[1]+losses[2]+losses[3]
+            print('output shape:' , output.shape)
+            print('targets shape', targets.shape)
+            loss = criterion(output, targets)
             val_loss += loss.item()
             
-            preds = torch.sigmoid(torch.stack(output).permute(1, 0, 2).cpu().squeeze(-1))
+            preds = torch.sigmoid(output)
             
             if val_preds is None:
                 val_preds = preds
@@ -63,7 +58,7 @@ def predict(dataloader, model, device):
     tk0 = tqdm(dataloader, desc="Predict")
     test_preds = None
     for step, batch in enumerate(tk0):
-        images = batch[0]
+        images = batch["image"]
         images = images.to(device, dtype=torch.float)
         with torch.no_grad():
             outputs = model(images)

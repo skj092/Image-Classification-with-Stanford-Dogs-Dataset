@@ -3,6 +3,7 @@ from glob import glob
 from PIL import Image
 import os 
 from pathlib import Path
+import ast 
 
 # collecting images
 p = Path('.')
@@ -20,4 +21,10 @@ def find_label(img):
     return m.group(1)
 
 
+# to convert label to class id
+class2id = open("class2id.txt", "r").read()
+class2id = ast.literal_eval(class2id)
+
+id2class = open("id2class.txt", "r").read()
+id2class = ast.literal_eval(id2class)
 
